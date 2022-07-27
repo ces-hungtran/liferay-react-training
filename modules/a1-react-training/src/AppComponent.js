@@ -1,32 +1,48 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import BeneficiaryProfile from './components/BenificiaryProfile';
+import BeneficiaryProfile from './components/BeneficiaryProfile';
 import FinishProfile from './components/FinishProfile';
 import InsuranceProfile from './components/InsuranceProfile';
 
-export default class extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {step: 3};
-		this.renderStep.bind(this);
-	}
+class AppComponents extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {step: 1};
+    this.renderStep.bind(this);
+  }
 
-	renderStep(step) {
-		switch (step) {
-			case 1:
-				return (<InsuranceProfile />);
-			case 2:
-				return (<BeneficiaryProfile />);
-			case 3:
-				return (<FinishProfile />);
-			default:
-				return (<h1>Invalid step {step} </h1>);
-		}
-	}
+  updateData = (newData) => {
+    this.setState({...this.state, ...newData});
+  };
 
-	render() {
-		return (
-            this.renderStep(this.state.step)
-		);
-	}	
+  renderStep(step) {
+    switch (step) {
+      case 1:
+        return (
+          <InsuranceProfile
+            step={this.state.step}
+            onUpdateData = {this.updateData}>
+          </InsuranceProfile >
+        );
+      case 2:
+        return (
+          <BeneficiaryProfile onUpdateData={this.updateData}>
+          </BeneficiaryProfile>
+        );
+      case 3:
+        return (
+          <FinishProfile onUpdateData={this.updateData}>
+          </FinishProfile>
+        );
+      default:
+        return (<h1>Invalid step {step} </h1>);
+    }
+  }
+
+  render() {
+    return (
+      this.renderStep(this.state.step)
+    );
+  }
 }
+
+export default AppComponents;

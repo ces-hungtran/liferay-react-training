@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class FinishProfile extends React.Component {
+class BeneficiaryProfile extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1>FinishProfile</h1>
+        <h1>BeneficiaryProfile</h1>
         {this.props.children }
       </React.Fragment>
     );
   }
 }
 
-FinishProfile.propTypes = {
+BeneficiaryProfile.propTypes = {
   children: PropTypes.any,
 };
 
-export default FinishProfile;
+export default BeneficiaryProfile;
