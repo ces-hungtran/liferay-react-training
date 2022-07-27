@@ -1,25 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import BeneficiaryProfile from './components/BenificiaryProfile';
+import FinishProfile from './components/FinishProfile';
+import InsuranceProfile from './components/InsuranceProfile';
 
 export default class extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {step: 3};
+		this.renderStep.bind(this);
+	}
+
+	renderStep(step) {
+		switch (step) {
+			case 1:
+				return (<InsuranceProfile />);
+			case 2:
+				return (<BeneficiaryProfile />);
+			case 3:
+				return (<FinishProfile />);
+			default:
+				return (<h1>Invalid step {step} </h1>);
+		}
+	}
+
 	render() {
 		return (
-            <div>
-                <h1>ces react training 1</h1>
-				<div>
-        	        <span className="tag">Portlet Namespace:</span> 
-					<span className="value">{this.props.portletNamespace}</span>
-				</div>
-				<div>
-    	            <span className="tag">Context Path:</span>
-					<span className="value">{this.props.contextPath}</span>
-				</div>
-				<div>
-	                <span className="tag">Portlet Element Id:</span>
-					<span className="value">{this.props.portletElementId}</span>
-				</div>
-				
-			</div>
+            this.renderStep(this.state.step)
 		);
 	}	
 }

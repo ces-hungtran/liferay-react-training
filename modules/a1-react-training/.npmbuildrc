@@ -1,10 +1,6 @@
 {
-	"webpack": {
-		"rules": [
-			{
-				"test": "src\\/.*\\.js$",
-				"use": "babel-loader"
-			}
-		]
+	"start": {
+		"dir": ".webpack",
+		"ejected": true
 	}
 }
