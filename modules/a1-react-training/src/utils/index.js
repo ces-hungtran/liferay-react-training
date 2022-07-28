@@ -1,5 +1,5 @@
 export function getDefaultString(val) {
-  return val ? val : '';
+  return val ? val : "";
 }
 
 export function getDefaultBoolean(val) {

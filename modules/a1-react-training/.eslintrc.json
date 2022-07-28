@@ -1,21 +1,19 @@
 {
     "env": {
-        "browser": true,
-        "es2021": true
+        "browser": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "google"
+        "plugin:@liferay/react"
     ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": "latest",
+        "ecmaVersion": 6,
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "@liferay"
     ],
     "rules": {
     }
