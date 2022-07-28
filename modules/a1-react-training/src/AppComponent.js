@@ -6,31 +6,32 @@ import InsuranceProfile from './components/InsuranceProfile';
 class AppComponents extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {step: 1};
-    this.renderStep.bind(this);
+    this.state = {
+      step: 1,
+      onUpdateData: (newData) => {
+        this.setState({...this.state, ...newData});
+      },
+    };
   }
-
-  updateData = (newData) => {
-    this.setState({...this.state, ...newData});
-  };
 
   renderStep(step) {
     switch (step) {
       case 1:
         return (
           <InsuranceProfile
-            step={this.state.step}
-            onUpdateData = {this.updateData}>
+            {...this.state}>
           </InsuranceProfile >
         );
       case 2:
         return (
-          <BeneficiaryProfile onUpdateData={this.updateData}>
+          <BeneficiaryProfile
+            {...this.state}>
           </BeneficiaryProfile>
         );
       case 3:
         return (
-          <FinishProfile onUpdateData={this.updateData}>
+          <FinishProfile
+            {...this.state}>
           </FinishProfile>
         );
       default:

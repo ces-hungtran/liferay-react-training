@@ -1,14 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 
 class PreviousButton extends React.Component {
-  render(props) {
+  constructor(props) {
+    super(props);
+    this.state = {decreaseStep: props.decreaseStep};
+  }
+
+  render() {
     return (
-      <button
-        type="submit"
-      >
+      <>
+        <Button
+          onClick = {this.state.decreaseStep}
+        >
         Previous
-      </button>
+        </Button>
+      </>
     );
   }
 }

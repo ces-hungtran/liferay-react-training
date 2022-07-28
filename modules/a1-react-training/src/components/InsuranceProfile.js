@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import NextButton from './NextButton';
 import TextField from '@material-ui/core/TextField';
 import 'yup-phone';
+import {getDefaultValue, getDefaultDate} from '../utils';
 
 
 const InsuranceProfileSchema = Yup.object().shape({
@@ -40,40 +41,42 @@ const InsuranceProfileSchema = Yup.object().shape({
 class InsuranceProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {step: props.step, updateData: this.props.onUpdateData};
+    this.state = {...props};
   }
+
 
   render() {
     return (
-      <>
-        <Formik
-          initialValues={{
-            myFirstName: '',
-            myMiddleName: '',
-            myLastName: '',
-            myEmail: '',
-            step: this.state.step + 1,
-            myBirthday: new Date().toISOString().split('T')[0],
-            myIDCard: '',
-            myPhoneNumber: '',
-            myMonthlySaving: '',
-          }}
+      <Formik
+        initialValues={{
+          myEmail: getDefaultValue(this.state.myEmail),
+          myFirstName: getDefaultValue(this.state.myFirstName),
+          myMiddleName: getDefaultValue(this.state.myMiddleName),
+          myLastName: getDefaultValue(this.state.myLastName),
+          step: getDefaultValue(this.state.step + 1),
+          myBirthday: new Date(getDefaultDate(this.state.myBirthday))
+              .toISOString().split('T')[0],
+          myIDCard: getDefaultValue(this.state.myIDCard),
+          myPhoneNumber: getDefaultValue(this.state.myPhoneNumber),
+          myMonthlySaving: getDefaultValue(this.state.myMonthlySaving),
+        }}
 
-          validateOnChange="true"
+        validateOnChange="true"
 
-          validationSchema={InsuranceProfileSchema}
+        validationSchema={InsuranceProfileSchema}
 
-          onSubmit = {
-            (value, action) => {
-              this.state.updateData(value);
-            }
+        onSubmit = {
+          (value, action) => {
+            this.state.onUpdateData(value);
           }
-        >{
-            (args) => {
-              const {errors, touched, values, handleChange,
-                initialValues} = args;
-              return (
-
+        }
+      >{
+          (args) => {
+            const {errors, touched, values, handleChange,
+              initialValues} = args;
+            return (
+              <>
+                <h1>Insurance Profile</h1>
                 <Form>
                   <div className="hidden-element">
                     <TextField
@@ -207,11 +210,11 @@ class InsuranceProfile extends React.Component {
 
                   <NextButton />
                 </Form>
-              );
-            }
+              </>
+            );
           }
-        </Formik>
-      </>
+        }
+      </Formik>
     );
   }
 }
