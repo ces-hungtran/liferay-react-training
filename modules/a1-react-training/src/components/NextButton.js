@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 
 class NextButton extends React.Component {
   render() {
     return (
-      <button
+      <Button
         type="submit"
       >
         Next
-      </button>
+      </Button>
     );
   }
 }

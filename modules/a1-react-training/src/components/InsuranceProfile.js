@@ -1,24 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Formik, Form, Field} from 'formik';
+import {Formik, Form} from 'formik';
 import * as Yup from 'yup';
 import NextButton from './NextButton';
+import TextField from '@material-ui/core/TextField';
+import 'yup-phone';
 
 
-const InsuaranceProfileSchema = Yup.object().shape({
-  firstName: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
+const InsuranceProfileSchema = Yup.object().shape({
+  myFirstName: Yup.string()
+      .min(2, 'First Name too short!')
+      .max(50, 'First Name too long!')
       .required('Required'),
-  middleName: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
+  myMiddleName: Yup.string()
+      .min(2, 'Middle Name too short!')
+      .max(50, 'Middle Name too long!')
+      .optional(),
+  myLastName: Yup.string()
+      .min(2, 'Last Name too short!')
+      .max(50, 'Last Name too long!')
       .required('Required'),
-  lastName: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
+  myEmail: Yup.string().email('Invalid myEmail').required('Required'),
+  myBirthday: Yup.date(),
+  myIDCard: Yup.number()
+      .typeError('ID number must contain digits only')
+      .integer('ID number must contain digits only')
+      .min(99999999, 'Invalid ID number')
+      .max(999999999999, 'Invalid ID number')
       .required('Required'),
-  email: Yup.string().email('Invalid email').required('Required'),
+  myPhoneNumber: Yup.string()
+      .required('Required')
+      .phone('VN', false, 'Invalid Phone number'),
+  myMonthlySaving: Yup.number()
+      .typeError('Monthly Saving must contain digits only')
+      .moreThan(0, 'Invalid monthly saving')
+      .required('Required'),
 });
 
 class InsuranceProfile extends React.Component {
@@ -26,68 +42,173 @@ class InsuranceProfile extends React.Component {
     super(props);
     this.state = {step: props.step, updateData: this.props.onUpdateData};
   }
+
   render() {
     return (
       <>
         <Formik
           initialValues={{
-            firstName: '',
-            middleName: '',
-            lastName: '',
-            email: '',
+            myFirstName: '',
+            myMiddleName: '',
+            myLastName: '',
+            myEmail: '',
             step: this.state.step + 1,
+            myBirthday: new Date().toISOString().split('T')[0],
+            myIDCard: '',
+            myPhoneNumber: '',
+            myMonthlySaving: '',
           }}
 
-          validationSchema={InsuaranceProfileSchema}
+          validateOnChange="true"
+
+          validationSchema={InsuranceProfileSchema}
 
           onSubmit = {
             (value, action) => {
-              this.state.updateData({...value});
+              this.state.updateData(value);
             }
           }
         >{
-            ({errors, touched}) => (
-              <Form>
-                <Field
-                  id="step"
-                  name="step"
-                />
-                <label htmlFor="email">Email</label>
-                <Field
-                  id="email"
-                  name="email"
-                  placeholder="hung.tran@codeenginestudio.com"
-                  type="email"
-                />
-                {errors.email && touched.email ? (
-                        <div>{errors.email}</div>
-                    ) : null}
+            (args) => {
+              const {errors, touched, values, handleChange,
+                initialValues} = args;
+              return (
+
+                <Form>
+                  <div className="hidden-element">
+                    <TextField
+                      id="step"
+                      name="step"
+                      value={values['step']}
+                    />
+                  </div>
+
+                  <TextField
+                    fullWidth
+                    onChange = {handleChange}
+                    id="myEmail"
+                    name="myEmail"
+                    placeholder="hung.tran@codeenginestudio.com"
+                    type="myEmail"
+                    label="Email"
+                    value={values['myEmail']}
+                    error={touched.myEmail && Boolean(errors.myEmail)}
+                    helperText={touched.myEmail && errors.myEmail}
+                  />
 
 
-                <label htmlFor="firstName">First Name</label>
-                <Field id="firstName" name="firstName" placeholder="Tran" />
-                {errors.firstName && touched.firstName ? (
-                        <div>{errors.firstName}</div>
-                    ) : null}
+                  <TextField
+                    id="myFirstName"
+                    name="myFirstName"
+                    fullWidth
+                    onChange = {handleChange}
+                    placeholder="Tran" label="First Name"
+                    value={values['myFirstName']}
+                    error={touched.myFirstName &&
+                    Boolean(errors.myFirstName)}
+                    helperText={
+                      touched.myFirstName &&
+                      errors.myFirstName}
+                  />
 
 
-                <label htmlFor="middleName">Middle Name</label>
-                <Field id="middleName" name="middleName" placeholder="Minh" />
-                {errors.middleName && touched.middleName ? (
-                        <div>{errors.middleName}</div>
-                    ) : null}
+                  <TextField
+                    id="myMiddleName"
+                    name="myMiddleName"
+                    fullWidth
+                    onChange = {handleChange}
+                    placeholder="Minh" label="Middle Name"
+                    value={values['myMiddleName']}
+                    error={
+                      touched.myMiddleName &&
+                      Boolean(errors.myMiddleName)}
+                    helperText={
+                      touched.myMiddleName &&
+                      errors.myMiddleName }
+                  />
 
 
-                <label htmlFor="lastName">Last Name</label>
-                <Field id="lastName" name="lastName" placeholder="Hung" />
-                {errors.lastName && touched.lastName ? (
-                        <div>{errors.lastName}</div>
-                    ) : null}
+                  <TextField
+                    id="myLastName"
+                    name="myLastName"
+                    fullWidth
+                    onChange = {handleChange}
+                    placeholder="Hung"
+                    label="Last Name"
+                    value={values['myLastName']}
+                    error={
+                      touched.myLastName &&
+                      Boolean(errors.myLastName)}
+                    helperText={
+                      touched.myLastName &&
+                      errors.myLastName }
+                  />
+
+                  <TextField
+                    id="myBirthday"
+                    label="Birthday"
+                    type="date"
+                    defaultValue = {initialValues['myBirthday']}
+                    onChange = {handleChange}
+                    error={
+                      touched.myBirthday &&
+                      Boolean(errors.myBirthday)}
+                    helperText={
+                      touched.myBirthday &&
+                      errors.myBirthday }
+                  />
 
 
-                <NextButton />
-              </Form>
-            )
+                  <TextField
+                    id="myIDCard"
+                    name="myIDCard"
+                    fullWidth
+                    onChange = {handleChange}
+                    placeholder="206123456"
+                    label="ID Card"
+                    value={values['myIDCard']}
+                    error={
+                      touched.myIDCard &&
+                      Boolean(errors.myIDCard)}
+                    helperText={
+                      touched.myIDCard &&
+                      errors.myIDCard }
+                  />
+
+                  <TextField
+                    id="myPhoneNumber"
+                    name="myPhoneNumber"
+                    fullWidth
+                    onChange = {handleChange}
+                    placeholder="0935123456" label="Phone number"
+                    value={values['myPhoneNumber']}
+                    error={
+                      touched.myPhoneNumber &&
+                      Boolean(errors.myPhoneNumber)}
+                    helperText={
+                      touched.myPhoneNumber &&
+                      errors.myPhoneNumber }
+                  />
+
+                  <TextField
+                    id="myMonthlySaving"
+                    name="myMonthlySaving"
+                    fullWidth
+                    onChange = {handleChange}
+                    placeholder="10000000" label="Monthly Saving"
+                    value={values['myMonthlySaving']}
+                    error={
+                      touched.myMonthlySaving &&
+                      Boolean(errors.myMonthlySaving)}
+                    helperText={
+                      touched.myMonthlySaving &&
+                      errors.myMonthlySaving }
+                  />
+
+                  <NextButton />
+                </Form>
+              );
+            }
           }
         </Formik>
       </>
