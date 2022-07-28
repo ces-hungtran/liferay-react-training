@@ -2,6 +2,7 @@ import React from 'react';
 import BeneficiaryProfile from './components/BeneficiaryProfile';
 import FinishProfile from './components/FinishProfile';
 import InsuranceProfile from './components/InsuranceProfile';
+import PreviousButton from './components/PreviousButton';
 
 class AppComponents extends React.Component {
   constructor(props) {
@@ -35,7 +36,13 @@ class AppComponents extends React.Component {
           </FinishProfile>
         );
       default:
-        return (<h1>Invalid step {step} </h1>);
+        return (<>
+          <h1> {step} Submitted </h1>
+          <PreviousButton decreaseStep = {() => {
+            this.setState({step: this.state.step -1});
+          }}/>
+        </>
+        );
     }
   }
 

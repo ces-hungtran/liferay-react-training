@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import NextButton from './NextButton';
 import TextField from '@material-ui/core/TextField';
 import 'yup-phone';
-import {getDefaultValue, getDefaultDate} from '../utils';
+import {getDefaultString, getDefaultDate} from '../utils';
 
 
 const InsuranceProfileSchema = Yup.object().shape({
@@ -22,7 +22,7 @@ const InsuranceProfileSchema = Yup.object().shape({
       .max(50, 'Last Name too long!')
       .required('Required'),
   myEmail: Yup.string().email('Invalid myEmail').required('Required'),
-  myBirthday: Yup.date(),
+  myBirthday: Yup.date().max(new Date(), 'Invalid birthday'),
   myIDCard: Yup.number()
       .typeError('ID number must contain digits only')
       .integer('ID number must contain digits only')
@@ -49,16 +49,16 @@ class InsuranceProfile extends React.Component {
     return (
       <Formik
         initialValues={{
-          myEmail: getDefaultValue(this.state.myEmail),
-          myFirstName: getDefaultValue(this.state.myFirstName),
-          myMiddleName: getDefaultValue(this.state.myMiddleName),
-          myLastName: getDefaultValue(this.state.myLastName),
-          step: getDefaultValue(this.state.step + 1),
+          myEmail: getDefaultString(this.state.myEmail),
+          myFirstName: getDefaultString(this.state.myFirstName),
+          myMiddleName: getDefaultString(this.state.myMiddleName),
+          myLastName: getDefaultString(this.state.myLastName),
+          step: getDefaultString(this.state.step + 1),
           myBirthday: new Date(getDefaultDate(this.state.myBirthday))
               .toISOString().split('T')[0],
-          myIDCard: getDefaultValue(this.state.myIDCard),
-          myPhoneNumber: getDefaultValue(this.state.myPhoneNumber),
-          myMonthlySaving: getDefaultValue(this.state.myMonthlySaving),
+          myIDCard: getDefaultString(this.state.myIDCard),
+          myPhoneNumber: getDefaultString(this.state.myPhoneNumber),
+          myMonthlySaving: getDefaultString(this.state.myMonthlySaving),
         }}
 
         validateOnChange="true"

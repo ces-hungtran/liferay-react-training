@@ -6,7 +6,7 @@ import NextButton from './NextButton';
 import PreviousButton from './PreviousButton';
 import TextField from '@material-ui/core/TextField';
 import 'yup-phone';
-import {getDefaultValue, getDefaultDate} from '../utils';
+import {getDefaultString, getDefaultDate} from '../utils';
 
 
 const BeneficiaryProfileSchema = Yup.object().shape({
@@ -23,7 +23,7 @@ const BeneficiaryProfileSchema = Yup.object().shape({
       .max(50, 'Last Name too long!')
       .required('Required'),
   hisEmail: Yup.string().email('Invalid hisEmail').required('Required'),
-  hisBirthday: Yup.date(),
+  hisBirthday: Yup.date().max(new Date(), 'Invalid birthday'),
   hisIDCard: Yup.number()
       .typeError('ID number must contain digits only')
       .integer('ID number must contain digits only')
@@ -55,18 +55,18 @@ class BeneficiaryProfile extends React.Component {
     return (
       <Formik
         initialValues={{
-          hisEmail: getDefaultValue(this.state.hisEmail),
-          hisFirstName: getDefaultValue(this.state.hisFirstName),
-          hisMiddleName: getDefaultValue(this.state.hisMiddleName),
-          hisLastName: getDefaultValue(this.state.hisLastName),
-          step: getDefaultValue(this.state.step + 1),
+          hisEmail: getDefaultString(this.state.hisEmail),
+          hisFirstName: getDefaultString(this.state.hisFirstName),
+          hisMiddleName: getDefaultString(this.state.hisMiddleName),
+          hisLastName: getDefaultString(this.state.hisLastName),
+          step: getDefaultString(this.state.step + 1),
           hisBirthday: new Date(getDefaultDate(this.state.hisBirthday))
               .toISOString().split('T')[0],
-          hisIDCard: getDefaultValue(this.state.hisIDCard),
-          hisPhoneNumber: getDefaultValue(this.state.hisPhoneNumber),
-          hisMonthlySaving: getDefaultValue(this.state.hisMonthlySaving),
+          hisIDCard: getDefaultString(this.state.hisIDCard),
+          hisPhoneNumber: getDefaultString(this.state.hisPhoneNumber),
+          hisMonthlySaving: getDefaultString(this.state.hisMonthlySaving),
           hisRelationshipWithMe:
-            getDefaultValue(this.state.hisRelationshipWithMe),
+            getDefaultString(this.state.hisRelationshipWithMe),
         }}
         validateOnChange="true"
 

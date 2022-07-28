@@ -3,12 +3,20 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 
 class NextButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {...props};
+  }
+  getButtonText = () => {
+    return this.state.text ? this.state.text : 'Next';
+  };
+
   render() {
     return (
       <Button
         type="submit"
       >
-        Next
+        {this.getButtonText()}
       </Button>
     );
   }
