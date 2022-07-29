@@ -12,7 +12,11 @@ class NextButton extends React.Component {
   };
 
   render() {
-    return <Button type="submit">{this.getButtonText()}</Button>;
+    return (
+      <Button onClick={this.state.increaseStep} type="submit">
+        {this.getButtonText()}
+      </Button>
+    );
   }
 }
 

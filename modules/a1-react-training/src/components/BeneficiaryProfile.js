@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import NextButton from "./NextButton";
-import PreviousButton from "./PreviousButton";
 import TextField from "@material-ui/core/TextField";
 import "yup-phone";
 import { getDefaultString, getDefaultDate } from "../utils";
@@ -204,9 +202,6 @@ class BeneficiaryProfile extends React.Component {
                     errors.hisRelationshipWithMe
                   }
                 />
-
-                <PreviousButton decreaseStep={this.decreaseStep} />
-                <NextButton />
               </Form>
             </>
           );

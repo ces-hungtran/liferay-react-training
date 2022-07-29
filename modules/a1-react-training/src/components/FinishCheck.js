@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PreviousButton from "./PreviousButton";
-import NextButton from "./NextButton";
 import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Formik, Form } from "formik";
@@ -58,8 +56,6 @@ class FinishCheck extends React.Component {
                   }
                 />
                 <br></br>
-                <PreviousButton decreaseStep={this.decreaseStep} />
-                <NextButton text="Finish" />
               </Form>
             </>
           );

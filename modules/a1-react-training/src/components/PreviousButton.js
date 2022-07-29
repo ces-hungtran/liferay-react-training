@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 class PreviousButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { decreaseStep: props.decreaseStep };
+    this.state = { ...props };
   }
 
   render() {
