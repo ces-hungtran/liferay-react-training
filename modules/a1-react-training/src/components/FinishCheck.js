@@ -8,7 +8,7 @@ import { Formik, Form } from "formik";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { getDefaultBoolean } from "../utils";
 
-class FinishProfile extends React.Component {
+class FinishCheck extends React.Component {
   constructor(props) {
     super(props);
     this.state = { ...props };
@@ -32,11 +32,9 @@ class FinishProfile extends React.Component {
       >
         {(args) => {
           const { errors, touched, values, handleChange } = args;
-          console.log(errors);
-          console.log(touched);
           return (
             <>
-              <h1>FinishProfile</h1>
+              <h1>Finish Profile</h1>
 
               <Form>
                 <div className="hidden-element">
@@ -71,8 +69,8 @@ class FinishProfile extends React.Component {
   }
 }
 
-FinishProfile.propTypes = {
+FinishCheck.propTypes = {
   children: PropTypes.any,
 };
 
-export default FinishProfile;
+export default FinishCheck;

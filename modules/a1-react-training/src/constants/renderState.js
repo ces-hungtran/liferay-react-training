@@ -1,0 +1,3 @@
+export const RENDER_INSURANCE_PROFILE = 1;
+export const RENDER_BENEFICIARY_PROFILE = 2;
+export const RENDER_FINISH_CHECK = 3;

@@ -6,35 +6,38 @@ import NextButton from "./NextButton";
 import TextField from "@material-ui/core/TextField";
 import "yup-phone";
 import { getDefaultString, getDefaultDate } from "../utils";
+import * as VALIDATOR_MSG from "../constants/formValidationMessage";
 
 const InsuranceProfileSchema = Yup.object().shape({
   myFirstName: Yup.string()
-    .min(2, "First Name too short!")
-    .max(50, "First Name too long!")
-    .required("Required"),
+    .min(2, VALIDATOR_MSG.FIRST_NAME_TOO_SHORT)
+    .max(50, VALIDATOR_MSG.FIRST_NAME_TOO_LONG)
+    .required(VALIDATOR_MSG.REQUIRED),
   myMiddleName: Yup.string()
-    .min(2, "Middle Name too short!")
-    .max(50, "Middle Name too long!")
+    .min(2, VALIDATOR_MSG.MIDDLE_NAME_TOO_SHORT)
+    .max(50, VALIDATOR_MSG.MIDDLE_NAME_TOO_LONG)
     .optional(),
   myLastName: Yup.string()
-    .min(2, "Last Name too short!")
-    .max(50, "Last Name too long!")
-    .required("Required"),
-  myEmail: Yup.string().email("Invalid myEmail").required("Required"),
-  myBirthday: Yup.date().max(new Date(), "Invalid birthday"),
+    .min(2, VALIDATOR_MSG.LAST_NAME_TOO_SHORT)
+    .max(50, VALIDATOR_MSG.LAST_NAME_TOO_LONG)
+    .required(VALIDATOR_MSG.REQUIRED),
+  myEmail: Yup.string()
+    .email(VALIDATOR_MSG.EMAIL_INVALID)
+    .required(VALIDATOR_MSG.REQUIRED),
+  myBirthday: Yup.date(),
   myIDCard: Yup.number()
-    .typeError("ID number must contain digits only")
-    .integer("ID number must contain digits only")
-    .min(99999999, "Invalid ID number")
-    .max(999999999999, "Invalid ID number")
-    .required("Required"),
+    .typeError(VALIDATOR_MSG.ID_CARD_DIGIT_ONLY)
+    .integer(VALIDATOR_MSG.ID_CARD_DIGIT_ONLY)
+    .min(99999999, VALIDATOR_MSG.ID_CARD_INVALID)
+    .max(999999999999, VALIDATOR_MSG.ID_CARD_INVALID)
+    .required(VALIDATOR_MSG.REQUIRED),
   myPhoneNumber: Yup.string()
-    .required("Required")
-    .min(9, "Invalid Phone number"),
+    .required(VALIDATOR_MSG.REQUIRED)
+    .min(9, VALIDATOR_MSG.PHONE_INVALID),
   myMonthlySaving: Yup.number()
-    .typeError("Monthly Saving must contain digits only")
-    .moreThan(0, "Invalid monthly saving")
-    .required("Required"),
+    .typeError(VALIDATOR_MSG.MONTHLY_SAVING_DIGIT_ONLY)
+    .moreThan(0, VALIDATOR_MSG.MONTHLY_SAVING_INVALID)
+    .required(VALIDATOR_MSG.REQUIRED),
 });
 
 class InsuranceProfile extends React.Component {

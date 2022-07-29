@@ -1,14 +1,15 @@
 import React from "react";
 import BeneficiaryProfile from "./components/BeneficiaryProfile";
-import FinishProfile from "./components/FinishProfile";
+import FinishCheck from "./components/FinishCheck";
 import InsuranceProfile from "./components/InsuranceProfile";
 import PreviousButton from "./components/PreviousButton";
+import * as RENDER_STATE from "./constants/renderState";
 
 class AppComponents extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 1,
+      step: 3,
       onUpdateData: (newData) => {
         this.setState({ ...this.state, ...newData });
       },
@@ -17,12 +18,12 @@ class AppComponents extends React.Component {
 
   renderStep(step) {
     switch (step) {
-      case 1:
+      case RENDER_STATE.RENDER_INSURANCE_PROFILE:
         return <InsuranceProfile {...this.state}></InsuranceProfile>;
-      case 2:
+      case RENDER_STATE.RENDER_BENEFICIARY_PROFILE:
         return <BeneficiaryProfile {...this.state}></BeneficiaryProfile>;
-      case 3:
-        return <FinishProfile {...this.state}></FinishProfile>;
+      case RENDER_STATE.RENDER_FINISH_CHECK:
+        return <FinishCheck {...this.state}></FinishCheck>;
       default:
         return (
           <>
