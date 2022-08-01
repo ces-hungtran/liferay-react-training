@@ -7,6 +7,8 @@ import "yup-phone";
 import { getDefaultString, getDefaultDate } from "../utils";
 import * as VALIDATOR_MSG from "../constants/formValidationMessage";
 
+import * as FORM_LABELS from "../constants/formLabels";
+
 const BeneficiaryProfileSchema = Yup.object().shape({
   hisFirstName: Yup.string()
     .min(2, VALIDATOR_MSG.FIRST_NAME_TOO_SHORT)
@@ -33,10 +35,6 @@ const BeneficiaryProfileSchema = Yup.object().shape({
   hisPhoneNumber: Yup.string()
     .required(VALIDATOR_MSG.REQUIRED)
     .min(9, VALIDATOR_MSG.PHONE_INVALID),
-  hisMonthlySaving: Yup.number()
-    .typeError(VALIDATOR_MSG.MONTHLY_SAVING_DIGIT_ONLY)
-    .moreThan(0, VALIDATOR_MSG.MONTHLY_SAVING_INVALID)
-    .required(VALIDATOR_MSG.REQUIRED),
   hisRelationshipWithMe: Yup.string().required(VALIDATOR_MSG.REQUIRED),
 });
 
@@ -92,7 +90,7 @@ class BeneficiaryProfile extends React.Component {
                   name="hisEmail"
                   placeholder="hung.tran@codeenginestudio.com"
                   type="hisEmail"
-                  label="Email"
+                  label={FORM_LABELS.EMAIL}
                   value={values["hisEmail"]}
                   error={touched.hisEmail && Boolean(errors.hisEmail)}
                   helperText={touched.hisEmail && errors.hisEmail}
@@ -104,7 +102,7 @@ class BeneficiaryProfile extends React.Component {
                   fullWidth
                   onChange={handleChange}
                   placeholder="Tran"
-                  label="First Name"
+                  label={FORM_LABELS.FIRST_NAME}
                   value={values["hisFirstName"]}
                   error={touched.hisFirstName && Boolean(errors.hisFirstName)}
                   helperText={touched.hisFirstName && errors.hisFirstName}
@@ -116,7 +114,7 @@ class BeneficiaryProfile extends React.Component {
                   fullWidth
                   onChange={handleChange}
                   placeholder="Minh"
-                  label="Middle Name"
+                  label={FORM_LABELS.MIDDLE_NAME}
                   value={values["hisMiddleName"]}
                   error={touched.hisMiddleName && Boolean(errors.hisMiddleName)}
                   helperText={touched.hisMiddleName && errors.hisMiddleName}
@@ -128,7 +126,7 @@ class BeneficiaryProfile extends React.Component {
                   fullWidth
                   onChange={handleChange}
                   placeholder="Hung"
-                  label="Last Name"
+                  label={FORM_LABELS.LAST_NAME}
                   value={values["hisLastName"]}
                   error={touched.hisLastName && Boolean(errors.hisLastName)}
                   helperText={touched.hisLastName && errors.hisLastName}
@@ -136,7 +134,7 @@ class BeneficiaryProfile extends React.Component {
 
                 <TextField
                   id="hisBirthday"
-                  label="Birthday"
+                  label={FORM_LABELS.BIRTHDAY}
                   type="date"
                   defaultValue={initialValues["hisBirthday"]}
                   onChange={handleChange}
@@ -150,7 +148,7 @@ class BeneficiaryProfile extends React.Component {
                   fullWidth
                   onChange={handleChange}
                   placeholder="206123456"
-                  label="ID Card"
+                  label={FORM_LABELS.ID_CARD}
                   value={values["hisIDCard"]}
                   error={touched.hisIDCard && Boolean(errors.hisIDCard)}
                   helperText={touched.hisIDCard && errors.hisIDCard}
@@ -162,7 +160,7 @@ class BeneficiaryProfile extends React.Component {
                   fullWidth
                   onChange={handleChange}
                   placeholder="0935123456"
-                  label="Phone number"
+                  label={FORM_LABELS.PHONE_NUMBER}
                   value={values["hisPhoneNumber"]}
                   error={
                     touched.hisPhoneNumber && Boolean(errors.hisPhoneNumber)
@@ -171,27 +169,12 @@ class BeneficiaryProfile extends React.Component {
                 />
 
                 <TextField
-                  id="hisMonthlySaving"
-                  name="hisMonthlySaving"
-                  fullWidth
-                  onChange={handleChange}
-                  placeholder="10000000"
-                  label="Monthly Saving"
-                  value={values["hisMonthlySaving"]}
-                  error={
-                    touched.hisMonthlySaving && Boolean(errors.hisMonthlySaving)
-                  }
-                  helperText={
-                    touched.hisMonthlySaving && errors.hisMonthlySaving
-                  }
-                />
-                <TextField
                   id="hisRelationshipWithMe"
                   name="hisRelationshipWithMe"
                   fullWidth
                   onChange={handleChange}
-                  placeholder="My son"
-                  label="Relationship with me"
+                  placeholder={FORM_LABELS.RELATIONSHIP_WITH_ME_PLH}
+                  label={FORM_LABELS.RELATIONSHIP_WITH_ME}
                   value={values["hisRelationshipWithMe"]}
                   error={
                     touched.hisRelationshipWithMe &&

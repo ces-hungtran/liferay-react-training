@@ -6,15 +6,13 @@ import { Formik, Form } from "formik";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { getDefaultBoolean } from "../utils";
 
+import * as FORM_LABELS from "../constants/formLabels";
+
 class FinishCheck extends React.Component {
   constructor(props) {
     super(props);
     this.state = { ...props };
   }
-
-  decreaseStep = () => {
-    this.state.onUpdateData({ step: this.state.step - 1 });
-  };
 
   render() {
     return (
@@ -50,10 +48,7 @@ class FinishCheck extends React.Component {
                       required={true}
                     />
                   }
-                  label={
-                    "I agree to submit my information to the " +
-                    "Insurance Company after checking the online contract"
-                  }
+                  label={FORM_LABELS.AGREE_TERMS}
                 />
                 <br></br>
               </Form>

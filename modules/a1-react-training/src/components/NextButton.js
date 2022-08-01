@@ -2,13 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 
+import { NEXT_LABEL } from "../constants/formLabels";
+
 class NextButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { ...props };
+    this.state = {
+      text: null,
+      increaseStep: () => {},
+    };
+  }
+  componentDidMount() {
+    this.setState({ ...this.props });
   }
   getButtonText = () => {
-    return this.state.text ? this.state.text : "Next";
+    return this.props.text ? this.props.text : NEXT_LABEL;
   };
 
   render() {

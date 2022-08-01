@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
+import { PREVIOUS_LABEL } from "../constants/formLabels";
 
 class PreviousButton extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class PreviousButton extends React.Component {
   render() {
     return (
       <>
-        <Button onClick={this.state.decreaseStep}>Previous</Button>
+        <Button onClick={this.state.decreaseStep}>{PREVIOUS_LABEL}</Button>
       </>
     );
   }

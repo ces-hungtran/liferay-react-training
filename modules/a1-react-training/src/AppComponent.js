@@ -12,40 +12,42 @@ class AppComponents extends React.Component {
     super(props);
     this.state = {
       step: 3,
+      onUpdateData: this.onUpdateData,
     };
+  }
+
+  componentDidMount() {
+    console.log("app did mount, udpate state function");
+    this.setState({ onUpdateData: this.onUpdateData });
   }
 
   onUpdateData = (newData) => {
     this.setState({ ...this.state, ...newData });
   };
 
-  renderStep = (step) => {
+  renderStep() {}
+
+  render() {
     let formBody = (
       <>
-        <h1>{step} Submitted </h1>
+        <h1>{this.state.step} Submitted </h1>
       </>
     );
+    console.log("hxx app state", this.state);
 
-    console.log(props);
-
-    switch (step) {
+    switch (this.state.step) {
       case RENDER_STATE.RENDER_INSURANCE_PROFILE:
-        formBody = <InsuranceProfile {...props} />;
+        formBody = <InsuranceProfile {...this.state} />;
       case RENDER_STATE.RENDER_BENEFICIARY_PROFILE:
-        formBody = <BeneficiaryProfile {...props} />;
+        formBody = <BeneficiaryProfile {...this.state} />;
       case RENDER_STATE.RENDER_FINISH_CHECK:
-        formBody = <FinishCheck {...props} />;
+        formBody = <FinishCheck {...this.state} />;
     }
     return (
       <>
-        {this.state.step}
-        {step} {formBody} <FormInsuranceNavigation {...props} />
+        {this.state.step} {formBody} <FormInsuranceNavigation {...this.state} />
       </>
     );
-  };
-
-  render() {
-    return this.renderStep(this.state.step);
   }
 }
 

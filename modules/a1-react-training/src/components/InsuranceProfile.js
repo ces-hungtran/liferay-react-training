@@ -7,6 +7,8 @@ import "yup-phone";
 import { getDefaultString, getDefaultDate } from "../utils";
 import * as VALIDATOR_MSG from "../constants/formValidationMessage";
 
+import * as FORM_LABELS from "../constants/formLabels";
+
 const InsuranceProfileSchema = Yup.object().shape({
   myFirstName: Yup.string()
     .min(2, VALIDATOR_MSG.FIRST_NAME_TOO_SHORT)
@@ -84,7 +86,7 @@ class InsuranceProfile extends React.Component {
                   name="myEmail"
                   placeholder="hung.tran@codeenginestudio.com"
                   type="myEmail"
-                  label="Email"
+                  label={FORM_LABELS.EMAIL}
                   value={values["myEmail"]}
                   error={touched.myEmail && Boolean(errors.myEmail)}
                   helperText={touched.myEmail && errors.myEmail}
@@ -96,7 +98,7 @@ class InsuranceProfile extends React.Component {
                   fullWidth
                   onChange={handleChange}
                   placeholder="Tran"
-                  label="First Name"
+                  label={FORM_LABELS.FIRST_NAME}
                   value={values["myFirstName"]}
                   error={touched.myFirstName && Boolean(errors.myFirstName)}
                   helperText={touched.myFirstName && errors.myFirstName}
@@ -108,7 +110,7 @@ class InsuranceProfile extends React.Component {
                   fullWidth
                   onChange={handleChange}
                   placeholder="Minh"
-                  label="Middle Name"
+                  label={FORM_LABELS.MIDDLE_NAME}
                   value={values["myMiddleName"]}
                   error={touched.myMiddleName && Boolean(errors.myMiddleName)}
                   helperText={touched.myMiddleName && errors.myMiddleName}
@@ -120,7 +122,7 @@ class InsuranceProfile extends React.Component {
                   fullWidth
                   onChange={handleChange}
                   placeholder="Hung"
-                  label="Last Name"
+                  label={FORM_LABELS.LAST_NAME}
                   value={values["myLastName"]}
                   error={touched.myLastName && Boolean(errors.myLastName)}
                   helperText={touched.myLastName && errors.myLastName}
@@ -128,7 +130,7 @@ class InsuranceProfile extends React.Component {
 
                 <TextField
                   id="myBirthday"
-                  label="Birthday"
+                  label={FORM_LABELS.BIRTHDAY}
                   type="date"
                   defaultValue={initialValues["myBirthday"]}
                   onChange={handleChange}
@@ -142,7 +144,7 @@ class InsuranceProfile extends React.Component {
                   fullWidth
                   onChange={handleChange}
                   placeholder="206123456"
-                  label="ID Card"
+                  label={FORM_LABELS.ID_CARD}
                   value={values["myIDCard"]}
                   error={touched.myIDCard && Boolean(errors.myIDCard)}
                   helperText={touched.myIDCard && errors.myIDCard}
@@ -154,7 +156,7 @@ class InsuranceProfile extends React.Component {
                   fullWidth
                   onChange={handleChange}
                   placeholder="0935123456"
-                  label="Phone number"
+                  label={FORM_LABELS.PHONE_NUMBER}
                   value={values["myPhoneNumber"]}
                   error={touched.myPhoneNumber && Boolean(errors.myPhoneNumber)}
                   helperText={touched.myPhoneNumber && errors.myPhoneNumber}
@@ -166,7 +168,7 @@ class InsuranceProfile extends React.Component {
                   fullWidth
                   onChange={handleChange}
                   placeholder="10000000"
-                  label="Monthly Saving"
+                  label={FORM_LABELS.MONTHLY_SAVING}
                   value={values["myMonthlySaving"]}
                   error={
                     touched.myMonthlySaving && Boolean(errors.myMonthlySaving)
