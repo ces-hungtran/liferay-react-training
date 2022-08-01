@@ -14,6 +14,11 @@ class FinishCheck extends React.Component {
     this.state = { ...props };
   }
 
+  onUpdateData = (value) => {
+    this.state.onUpdateData(value);
+    this.setState(value);
+  };
+
   render() {
     return (
       <Formik
@@ -23,7 +28,7 @@ class FinishCheck extends React.Component {
         }}
         validateOnChange="true"
         onSubmit={(value, action) => {
-          this.state.onUpdateData(value);
+          this.onUpdateData(value);
         }}
       >
         {(args) => {

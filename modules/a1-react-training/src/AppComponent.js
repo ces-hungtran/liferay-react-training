@@ -17,7 +17,6 @@ class AppComponents extends React.Component {
   }
 
   componentDidMount() {
-    console.log("app did mount, udpate state function");
     this.setState({ onUpdateData: this.onUpdateData });
   }
 
@@ -38,10 +37,13 @@ class AppComponents extends React.Component {
     switch (this.state.step) {
       case RENDER_STATE.RENDER_INSURANCE_PROFILE:
         formBody = <InsuranceProfile {...this.state} />;
+        break;
       case RENDER_STATE.RENDER_BENEFICIARY_PROFILE:
         formBody = <BeneficiaryProfile {...this.state} />;
+        break;
       case RENDER_STATE.RENDER_FINISH_CHECK:
         formBody = <FinishCheck {...this.state} />;
+        break;
     }
     return (
       <>

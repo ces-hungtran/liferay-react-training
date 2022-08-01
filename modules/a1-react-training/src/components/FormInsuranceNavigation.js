@@ -41,7 +41,6 @@ class FormInsuranceNavigation extends React.Component {
   };
 
   render() {
-    console.log(this.state);
     const step = this.state.step,
       maxStep = this.state.maxStep,
       minStep = this.state.minStep;
