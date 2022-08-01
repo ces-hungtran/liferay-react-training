@@ -39,45 +39,50 @@ const BeneficiaryProfileSchema = Yup.object().shape({
 });
 
 class BeneficiaryProfile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...props };
-  }
-
-  decreaseStep = () => {
-    this.state.onUpdateData({ step: this.state.step - 1 });
-  };
-
   render() {
     return (
       <Formik
         initialValues={{
-          hisEmail: getDefaultString(this.state.hisEmail),
-          hisFirstName: getDefaultString(this.state.hisFirstName),
-          hisMiddleName: getDefaultString(this.state.hisMiddleName),
-          hisLastName: getDefaultString(this.state.hisLastName),
-          step: getDefaultString(this.state.step + 1),
-          hisBirthday: new Date(getDefaultDate(this.state.hisBirthday))
+          hisEmail: getDefaultString(this.props.beneficiaryProfile.hisEmail),
+          hisFirstName: getDefaultString(
+            this.props.beneficiaryProfile.hisFirstName
+          ),
+          hisMiddleName: getDefaultString(
+            this.props.beneficiaryProfile.hisMiddleName
+          ),
+          hisLastName: getDefaultString(
+            this.props.beneficiaryProfile.hisLastName
+          ),
+          step: getDefaultString(this.props.step + 1),
+          hisBirthday: new Date(
+            getDefaultDate(this.props.beneficiaryProfile.hisBirthday)
+          )
             .toISOString()
             .split("T")[0],
-          hisIDCard: getDefaultString(this.state.hisIDCard),
-          hisPhoneNumber: getDefaultString(this.state.hisPhoneNumber),
-          hisMonthlySaving: getDefaultString(this.state.hisMonthlySaving),
+          hisIDCard: getDefaultString(this.props.beneficiaryProfile.hisIDCard),
+          hisPhoneNumber: getDefaultString(
+            this.props.beneficiaryProfile.hisPhoneNumber
+          ),
+          hisMonthlySaving: getDefaultString(
+            this.props.beneficiaryProfile.hisMonthlySaving
+          ),
           hisRelationshipWithMe: getDefaultString(
-            this.state.hisRelationshipWithMe
+            this.props.beneficiaryProfile.hisRelationshipWithMe
           ),
         }}
         validateOnChange="true"
         validationSchema={BeneficiaryProfileSchema}
         onSubmit={(value, action) => {
-          this.state.onUpdateData(value);
+          const submitValue = Object.assign({}, value);
+          delete submitValue.step;
+          this.props.onUpdateData(submitValue, value.step);
         }}
       >
         {(args) => {
           const { errors, touched, values, handleChange, initialValues } = args;
           return (
             <>
-              <h1>Beneficiary Profile</h1>
+              <h1>{this.props.step} Beneficiary Profile</h1>
               <Form>
                 <div className="hidden-element">
                   <TextField id="step" name="step" value={values["step"]} />
@@ -194,11 +199,5 @@ class BeneficiaryProfile extends React.Component {
     );
   }
 }
-
-BeneficiaryProfile.propTypes = {
-  children: PropTypes.any,
-  onUpdateData: PropTypes.func,
-  step: PropTypes.number,
-};
 
 export default BeneficiaryProfile;

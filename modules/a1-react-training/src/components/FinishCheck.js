@@ -9,32 +9,25 @@ import { getDefaultBoolean } from "../utils";
 import * as FORM_LABELS from "../constants/formLabels";
 
 class FinishCheck extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...props };
-  }
-
-  onUpdateData = (value) => {
-    this.state.onUpdateData(value);
-  };
-
   render() {
     return (
       <Formik
         initialValues={{
-          isAgreeTerm: getDefaultBoolean(this.state.isAgreeTerm),
-          step: this.state.step + 1,
+          isAgreeTerm: getDefaultBoolean(this.props.finishCheck.isAgreeTerm),
+          step: this.props.step + 1,
         }}
         validateOnChange="true"
         onSubmit={(value, action) => {
-          this.onUpdateData(value);
+          const submitValue = Object.assign({}, value);
+          delete submitValue.step;
+          this.props.onUpdateData(submitValue, value.step);
         }}
       >
         {(args) => {
           const { errors, touched, values, handleChange } = args;
           return (
             <>
-              <h1>Finish Profile</h1>
+              <h1>{this.props.step} Finish Profile</h1>
 
               <Form>
                 <div className="hidden-element">
@@ -64,9 +57,5 @@ class FinishCheck extends React.Component {
     );
   }
 }
-
-FinishCheck.propTypes = {
-  children: PropTypes.any,
-};
 
 export default FinishCheck;

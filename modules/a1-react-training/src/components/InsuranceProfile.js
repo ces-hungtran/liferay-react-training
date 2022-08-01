@@ -42,38 +42,45 @@ const InsuranceProfileSchema = Yup.object().shape({
 });
 
 class InsuranceProfile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...props };
-  }
-
   render() {
     return (
       <Formik
         initialValues={{
-          myEmail: getDefaultString(this.state.myEmail),
-          myFirstName: getDefaultString(this.state.myFirstName),
-          myMiddleName: getDefaultString(this.state.myMiddleName),
-          myLastName: getDefaultString(this.state.myLastName),
-          step: getDefaultString(this.state.step + 1),
-          myBirthday: new Date(getDefaultDate(this.state.myBirthday))
+          myEmail: getDefaultString(this.props.insuranceProfile.myEmail),
+          myFirstName: getDefaultString(
+            this.props.insuranceProfile.myFirstName
+          ),
+          myMiddleName: getDefaultString(
+            this.props.insuranceProfile.myMiddleName
+          ),
+          myLastName: getDefaultString(this.props.insuranceProfile.myLastName),
+          step: getDefaultString(this.props.step + 1),
+          myBirthday: new Date(
+            getDefaultDate(this.props.insuranceProfile.myBirthday)
+          )
             .toISOString()
             .split("T")[0],
-          myIDCard: getDefaultString(this.state.myIDCard),
-          myPhoneNumber: getDefaultString(this.state.myPhoneNumber),
-          myMonthlySaving: getDefaultString(this.state.myMonthlySaving),
+          myIDCard: getDefaultString(this.props.insuranceProfile.myIDCard),
+          myPhoneNumber: getDefaultString(
+            this.props.insuranceProfile.myPhoneNumber
+          ),
+          myMonthlySaving: getDefaultString(
+            this.props.insuranceProfile.myMonthlySaving
+          ),
         }}
         validateOnChange="true"
         validationSchema={InsuranceProfileSchema}
         onSubmit={(value, action) => {
-          this.state.onUpdateData(value);
+          const submitValue = Object.assign({}, value);
+          delete submitValue.step;
+          this.props.onUpdateData(submitValue, value.step);
         }}
       >
         {(args) => {
           const { errors, touched, values, handleChange, initialValues } = args;
           return (
             <>
-              <h1>Insurance Profile</h1>
+              <h1>{this.props.step} Insurance Profile</h1>
               <Form>
                 <div className="hidden-element">
                   <TextField id="step" name="step" value={values["step"]} />
@@ -176,11 +183,5 @@ class InsuranceProfile extends React.Component {
     );
   }
 }
-
-InsuranceProfile.propTypes = {
-  children: PropTypes.any,
-  onUpdateData: PropTypes.func,
-  step: PropTypes.number,
-};
 
 export default InsuranceProfile;

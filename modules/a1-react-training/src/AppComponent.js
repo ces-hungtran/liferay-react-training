@@ -12,48 +12,75 @@ class AppComponents extends React.Component {
     super(props);
     this.state = {
       step: 3,
-      onUpdateData: this.onUpdateData,
+      insuranceProfile: {},
+      beneficiaryProfile: {},
+      finishCheck: {},
     };
   }
 
-  componentDidMount() {
-    this.setState({ onUpdateData: this.onUpdateData });
-  }
+  onUpdateInsuranceProfile = (newData, step) => {
+    this.setState({ insuranceProfile: newData, step: step });
+  };
 
-  onUpdateData = (newData) => {
-    this.setState({ ...this.state, ...newData });
+  onUpdateBeneficiaryProfile = (newData, step) => {
+    this.setState({ beneficiaryProfile: newData, step: step });
+  };
+
+  onUpdateFinishCheck = (newData, step) => {
+    this.setState({ finishCheck: newData, step: step });
+  };
+
+  onUpdateStep = (newData) => {
+    this.setState({ step: newData });
   };
 
   renderStep() {}
 
   render() {
+    const navigationComponent = (
+      <FormInsuranceNavigation
+        step={this.state.step}
+        onUpdateData={this.onUpdateStep}
+      />
+    );
     let formBody = (
       <>
         <h1>{this.state.step} Submitted </h1>
-        <FormInsuranceNavigation {...this.state} />
+        {navigationComponent}
       </>
     );
-    console.log("hxx app state", this.state);
 
     switch (this.state.step) {
       case RENDER_STATE.RENDER_INSURANCE_PROFILE:
         formBody = (
-          <InsuranceProfile {...this.state}>
-            <FormInsuranceNavigation {...this.state} />
+          <InsuranceProfile
+            step={this.state.step}
+            onUpdateData={this.onUpdateInsuranceProfile}
+            insuranceProfile={this.state.insuranceProfile}
+          >
+            {navigationComponent}
           </InsuranceProfile>
         );
         break;
       case RENDER_STATE.RENDER_BENEFICIARY_PROFILE:
         formBody = (
-          <BeneficiaryProfile {...this.state}>
-            <FormInsuranceNavigation {...this.state} />
+          <BeneficiaryProfile
+            step={this.state.step}
+            onUpdateData={this.onUpdateBeneficiaryProfile}
+            beneficiaryProfile={this.state.beneficiaryProfile}
+          >
+            {navigationComponent}
           </BeneficiaryProfile>
         );
         break;
       case RENDER_STATE.RENDER_FINISH_CHECK:
         formBody = (
-          <FinishCheck {...this.state}>
-            <FormInsuranceNavigation {...this.state} />
+          <FinishCheck
+            step={this.state.step}
+            onUpdateData={this.onUpdateFinishCheck}
+            finishCheck={this.state.finishCheck}
+          >
+            {navigationComponent}
           </FinishCheck>
         );
         break;

@@ -7,20 +7,18 @@ import { SUBMIT_LABEL } from "../constants/formLabels";
 class FormInsuranceNavigation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { step: 0, minStep: 0, maxStep: 0, onUpdateData: () => {} };
+    this.state = { minStep: 0, maxStep: 0 };
   }
 
   componentDidMount() {
     this.setState({
-      ...this.props,
       maxStep: Math.max(...Object.values(RENDER_STATE)),
       minStep: Math.min(...Object.values(RENDER_STATE)),
     });
   }
 
   updateStep = (newStep) => {
-    this.state.onUpdateData({ step: newStep });
-    this.setState({ step: newStep });
+    this.props.onUpdateData(newStep);
   };
 
   nextButtonWithStep = (text) => {
@@ -30,13 +28,13 @@ class FormInsuranceNavigation extends React.Component {
   previousButtonWithStep = () => {
     return (
       <PreviousButton
-        decreaseStep={() => this.updateStep(this.state.step - 1)}
+        decreaseStep={() => this.updateStep(this.props.step - 1)}
       />
     );
   };
 
   render() {
-    const step = this.state.step,
+    const step = this.props.step,
       maxStep = this.state.maxStep,
       minStep = this.state.minStep;
     if (step > maxStep) {
