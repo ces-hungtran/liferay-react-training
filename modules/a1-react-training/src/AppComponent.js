@@ -11,7 +11,7 @@ class AppComponents extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 3,
+      step: 1,
       insuranceProfile: {},
       beneficiaryProfile: {},
       finishCheck: {},
@@ -33,8 +33,6 @@ class AppComponents extends React.Component {
   onUpdateStep = (newData) => {
     this.setState({ step: newData });
   };
-
-  renderStep() {}
 
   render() {
     const navigationComponent = (
@@ -85,11 +83,7 @@ class AppComponents extends React.Component {
         );
         break;
     }
-    return (
-      <>
-        {this.state.step} {formBody}
-      </>
-    );
+    return <>{formBody}</>;
   }
 }
 

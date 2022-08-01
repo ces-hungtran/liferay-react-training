@@ -184,4 +184,10 @@ class InsuranceProfile extends React.Component {
   }
 }
 
+InsuranceProfile.propTypes = {
+  children: PropTypes.any,
+  onUpdateData: PropTypes.func,
+  step: PropTypes.number,
+};
+
 export default InsuranceProfile;

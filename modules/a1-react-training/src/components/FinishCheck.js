@@ -58,4 +58,10 @@ class FinishCheck extends React.Component {
   }
 }
 
+FinishCheck.propTypes = {
+  children: PropTypes.any,
+  step: PropTypes.number,
+  finishCheck: PropTypes.object,
+};
+
 export default FinishCheck;

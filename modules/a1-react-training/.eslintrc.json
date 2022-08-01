@@ -3,7 +3,7 @@
         "browser": true
     },
     "extends": [
-        "plugin:@liferay/react"
+        "plugin:@liferay/portal"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -13,8 +13,9 @@
         "sourceType": "module"
     },
     "plugins": [
-        "@liferay"
+        "@liferay/react"
     ],
     "rules": {
+	    
     }
 }

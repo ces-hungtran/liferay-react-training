@@ -18,4 +18,9 @@ class NextButton extends React.Component {
   }
 }
 
+NextButton.propTypes = {
+  step: PropTypes.number,
+  text: PropTypes.string,
+};
+
 export default NextButton;

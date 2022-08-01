@@ -13,4 +13,9 @@ class PreviousButton extends React.Component {
   }
 }
 
+PreviousButton.propTypes = {
+  decreaseStep: PropTypes.func,
+  step: PropTypes.number,
+};
+
 export default PreviousButton;

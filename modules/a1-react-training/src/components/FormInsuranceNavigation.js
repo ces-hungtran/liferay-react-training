@@ -3,20 +3,11 @@ import NextButton from "./NextButton";
 import RENDER_STATE from "../constants/renderState";
 import React from "react";
 import { SUBMIT_LABEL } from "../constants/formLabels";
+import PropTypes from "prop-types";
 
+const MAX_STEP = Math.max(...Object.values(RENDER_STATE));
+const MIN_STEP = Math.min(...Object.values(RENDER_STATE));
 class FormInsuranceNavigation extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { minStep: 0, maxStep: 0 };
-  }
-
-  componentDidMount() {
-    this.setState({
-      maxStep: Math.max(...Object.values(RENDER_STATE)),
-      minStep: Math.min(...Object.values(RENDER_STATE)),
-    });
-  }
-
   updateStep = (newStep) => {
     this.props.onUpdateData(newStep);
   };
@@ -34,21 +25,19 @@ class FormInsuranceNavigation extends React.Component {
   };
 
   render() {
-    const step = this.props.step,
-      maxStep = this.state.maxStep,
-      minStep = this.state.minStep;
-    if (step > maxStep) {
+    const step = this.props.step;
+    if (step > MAX_STEP) {
       return this.previousButtonWithStep();
-    } else if (minStep < step && step < maxStep) {
+    } else if (MIN_STEP < step && step < MAX_STEP) {
       return (
         <>
           {this.previousButtonWithStep()}
           {this.nextButtonWithStep()}
         </>
       );
-    } else if (step === minStep) {
+    } else if (step === MIN_STEP) {
       return this.nextButtonWithStep();
-    } else if (step === maxStep) {
+    } else if (step === MAX_STEP) {
       return (
         <>
           {this.previousButtonWithStep()}
@@ -59,4 +48,10 @@ class FormInsuranceNavigation extends React.Component {
     return <h1>Invalid step</h1>;
   }
 }
+
+FormInsuranceNavigation.propTypes = {
+  step: PropTypes.number,
+  onUpdateData: PropTypes.func,
+};
+
 export default FormInsuranceNavigation;

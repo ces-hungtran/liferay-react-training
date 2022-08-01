@@ -200,4 +200,11 @@ class BeneficiaryProfile extends React.Component {
   }
 }
 
+BeneficiaryProfile.propTypes = {
+  children: PropTypes.any,
+  onUpdateData: PropTypes.func,
+  step: PropTypes.number,
+  beneficiaryProfile: PropTypes.object,
+};
+
 export default BeneficiaryProfile;
