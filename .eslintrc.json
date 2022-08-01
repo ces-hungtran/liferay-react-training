@@ -1,0 +1,21 @@
+{
+    "env": {
+        "browser": true
+    },
+    "extends": [
+        "plugin:@liferay/portal"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@liferay/react"
+    ],
+    "rules": {
+	    
+    }
+}
