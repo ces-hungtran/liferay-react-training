@@ -24,12 +24,7 @@ class FormInsuranceNavigation extends React.Component {
   };
 
   nextButtonWithStep = (text) => {
-    return (
-      <NextButton
-        text={text}
-        increaseStep={() => this.updateStep(this.state.step + 1)}
-      />
-    );
+    return <NextButton text={text} />;
   };
 
   previousButtonWithStep = () => {

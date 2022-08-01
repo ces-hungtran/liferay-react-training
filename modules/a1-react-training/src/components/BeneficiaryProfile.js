@@ -185,6 +185,7 @@ class BeneficiaryProfile extends React.Component {
                     errors.hisRelationshipWithMe
                   }
                 />
+                {this.props.children}
               </Form>
             </>
           );

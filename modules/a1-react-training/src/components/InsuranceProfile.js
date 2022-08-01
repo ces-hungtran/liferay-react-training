@@ -78,7 +78,6 @@ class InsuranceProfile extends React.Component {
                 <div className="hidden-element">
                   <TextField id="step" name="step" value={values["step"]} />
                 </div>
-
                 <TextField
                   fullWidth
                   onChange={handleChange}
@@ -91,7 +90,6 @@ class InsuranceProfile extends React.Component {
                   error={touched.myEmail && Boolean(errors.myEmail)}
                   helperText={touched.myEmail && errors.myEmail}
                 />
-
                 <TextField
                   id="myFirstName"
                   name="myFirstName"
@@ -103,7 +101,6 @@ class InsuranceProfile extends React.Component {
                   error={touched.myFirstName && Boolean(errors.myFirstName)}
                   helperText={touched.myFirstName && errors.myFirstName}
                 />
-
                 <TextField
                   id="myMiddleName"
                   name="myMiddleName"
@@ -115,7 +112,6 @@ class InsuranceProfile extends React.Component {
                   error={touched.myMiddleName && Boolean(errors.myMiddleName)}
                   helperText={touched.myMiddleName && errors.myMiddleName}
                 />
-
                 <TextField
                   id="myLastName"
                   name="myLastName"
@@ -127,7 +123,6 @@ class InsuranceProfile extends React.Component {
                   error={touched.myLastName && Boolean(errors.myLastName)}
                   helperText={touched.myLastName && errors.myLastName}
                 />
-
                 <TextField
                   id="myBirthday"
                   label={FORM_LABELS.BIRTHDAY}
@@ -137,7 +132,6 @@ class InsuranceProfile extends React.Component {
                   error={touched.myBirthday && Boolean(errors.myBirthday)}
                   helperText={touched.myBirthday && errors.myBirthday}
                 />
-
                 <TextField
                   id="myIDCard"
                   name="myIDCard"
@@ -149,7 +143,6 @@ class InsuranceProfile extends React.Component {
                   error={touched.myIDCard && Boolean(errors.myIDCard)}
                   helperText={touched.myIDCard && errors.myIDCard}
                 />
-
                 <TextField
                   id="myPhoneNumber"
                   name="myPhoneNumber"
@@ -161,7 +154,6 @@ class InsuranceProfile extends React.Component {
                   error={touched.myPhoneNumber && Boolean(errors.myPhoneNumber)}
                   helperText={touched.myPhoneNumber && errors.myPhoneNumber}
                 />
-
                 <TextField
                   id="myMonthlySaving"
                   name="myMonthlySaving"
@@ -175,6 +167,7 @@ class InsuranceProfile extends React.Component {
                   }
                   helperText={touched.myMonthlySaving && errors.myMonthlySaving}
                 />
+                {this.props.children}
               </Form>
             </>
           );

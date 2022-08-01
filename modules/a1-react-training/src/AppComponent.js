@@ -30,24 +30,37 @@ class AppComponents extends React.Component {
     let formBody = (
       <>
         <h1>{this.state.step} Submitted </h1>
+        <FormInsuranceNavigation {...this.state} />
       </>
     );
     console.log("hxx app state", this.state);
 
     switch (this.state.step) {
       case RENDER_STATE.RENDER_INSURANCE_PROFILE:
-        formBody = <InsuranceProfile {...this.state} />;
+        formBody = (
+          <InsuranceProfile {...this.state}>
+            <FormInsuranceNavigation {...this.state} />
+          </InsuranceProfile>
+        );
         break;
       case RENDER_STATE.RENDER_BENEFICIARY_PROFILE:
-        formBody = <BeneficiaryProfile {...this.state} />;
+        formBody = (
+          <BeneficiaryProfile {...this.state}>
+            <FormInsuranceNavigation {...this.state} />
+          </BeneficiaryProfile>
+        );
         break;
       case RENDER_STATE.RENDER_FINISH_CHECK:
-        formBody = <FinishCheck {...this.state} />;
+        formBody = (
+          <FinishCheck {...this.state}>
+            <FormInsuranceNavigation {...this.state} />
+          </FinishCheck>
+        );
         break;
     }
     return (
       <>
-        {this.state.step} {formBody} <FormInsuranceNavigation {...this.state} />
+        {this.state.step} {formBody}
       </>
     );
   }

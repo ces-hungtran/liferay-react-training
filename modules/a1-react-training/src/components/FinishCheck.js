@@ -16,7 +16,6 @@ class FinishCheck extends React.Component {
 
   onUpdateData = (value) => {
     this.state.onUpdateData(value);
-    this.setState(value);
   };
 
   render() {
@@ -56,6 +55,7 @@ class FinishCheck extends React.Component {
                   label={FORM_LABELS.AGREE_TERMS}
                 />
                 <br></br>
+                {this.props.children}
               </Form>
             </>
           );
