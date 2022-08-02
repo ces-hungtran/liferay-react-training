@@ -1,0 +1,6 @@
+{
+	"start": {
+		"dir": ".webpack",
+		"ejected": true
+	}
+}

@@ -1,0 +1,5 @@
+module.exports = {
+	plugins: ['@liferay'],
+	extends: ['plugin:@liferay/react'],
+};
+
