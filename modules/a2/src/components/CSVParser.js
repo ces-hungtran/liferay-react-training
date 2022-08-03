@@ -1,9 +1,7 @@
 import React from "react";
 import UploadFile from "./UploadFile";
-class CSVParser extends React.Component {
-  render() {
-    return <UploadFile />;
-  }
+function CSVParser(props) {
+  return <UploadFile />;
 }
 
 export default CSVParser;

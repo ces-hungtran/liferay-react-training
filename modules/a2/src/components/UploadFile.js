@@ -1,87 +1,87 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 
 import { Formik } from "formik";
 import HeaderMatching from "./HeaderMatching";
+import { getOneProduct } from "../services/action";
 
-class UploadFile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { file: "" };
+function UploadFile(props) {
+  const [state, setState] = useState({
+    file: "",
+    fileContent: "",
+    loading: false,
+  });
+
+  useEffect(() => {
+    if (state.loading === false) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setState({
+        ...state,
+        loading: false,
+        fileContent: reader.result,
+        file: "",
+      });
+    };
+
+    if (state.file) {
+      reader.readAsText(state.file);
+    }
+  }, [state.loading, state.file]);
+
+  if (state.loading) {
+    return <h1>Loading...</h1>;
   }
-  renderFileContent = () => {
-    return <h1>xxx</h1>;
-    // return <HeaderMatching {...this.state} />;
+  if (state.fileContent) {
+    return <HeaderMatching {...state} />;
+  }
+  const formikProps = {
+    initialValues: {
+      uploadCSV: "",
+      uploadCSVInputBox: "",
+    },
+    validateOnBlur: true,
+    validateOnchange: true,
+
+    onSubmit: async (values, action) => {
+      setState({ ...state, file: values["file"], loading: true });
+    },
   };
 
-  render() {
-    // if (this.state.loading) {
-    return <h1>Loading...</h1>;
-    // }
-    // if (this.state.fileContent) {
-    //   return this.renderFileContent();
-    // }
-    // const formikProps = {
-    //   initialValues: {
-    //     uploadCSV: "",
-    //     uploadCSVInputBox: "",
-    //   },
-    //   validateOnBlur: true,
-    //   validateOnchange: true,
+  return (
+    <Formik {...formikProps}>
+      {(props) => {
+        return (
+          <>
+            <form>
+              <Button id="uploadCSV" variant="contained" component="label">
+                Upload CSV file
+                <input
+                  value={props.values["uploadCSVInputBox"]}
+                  onChange={(event) => {
+                    props.setFieldValue("file", event.currentTarget.files[0]);
+                    props.handleChange(event);
+                  }}
+                  id="uploadCSVInputBox"
+                  hidden
+                  accept=".csv"
+                  multiple
+                  type="file"
+                />
+              </Button>
 
-    //   onSubmit: async (values, action) => {
-    //     console.log("values", values);
-    //     this.setState({ file: values["filehxx"] });
-
-    //     this.setState({ loading: true }, () => {
-    //       const reader = new FileReader();
-    //       reader.onloadend = () => {
-    //         this.setState({
-    //           loading: false,
-    //           fileContent: reader.result,
-    //         });
-    //       };
-    //       reader.readAsText(values["filehxx"]);
-    //     });
-    //   },
-    // };
-
-    // return (
-    //   <Formik {...formikProps}>
-    //     {(props) => {
-    //       return (
-    //         <>
-    //           <form>
-    //             <Button id="uploadCSV" variant="contained" component="label">
-    //               Upload CSV file
-    //               <input
-    //                 value={props.values["uploadCSVInputBox"]}
-    //                 onChange={(event) => {
-    //                   console.log("hxx file", event.currentTarget.files[0]);
-    //                   props.setFieldValue(
-    //                     "filehxx",
-    //                     event.currentTarget.files[0]
-    //                   );
-    //                   props.handleChange(event);
-    //                 }}
-    //                 id="uploadCSVInputBox"
-    //                 hidden
-    //                 accept=".csv"
-    //                 multiple
-    //                 type="file"
-    //               />
-    //             </Button>
-
-    //             <Button onClick={props.handleSubmit} type="submit">
-    //               submit hxx
-    //             </Button>
-    //           </form>
-    //         </>
-    //       );
-    //     }}
-    //   </Formik>
-    // );
-  }
+              <Button onClick={props.handleSubmit} type="submit">
+                Submit
+              </Button>
+            </form>
+          </>
+        );
+      }}
+    </Formik>
+  );
 }
 
 export default UploadFile;

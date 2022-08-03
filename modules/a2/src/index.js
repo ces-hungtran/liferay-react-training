@@ -1,5 +1,5 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom";
 
 import AppComponent from "./AppComponent";
 
@@ -12,13 +12,15 @@ import AppComponent from "./AppComponent";
  * @param  {Object} params a hash with values of interest to the portlet
  * @return {void}
  */
+import { createRoot } from "react-dom/client";
+
 export default function main({
   portletNamespace,
   contextPath,
   portletElementId,
 }) {
   const container = document.getElementById(portletElementId);
-  const root = createRoot(container);
+  const root = createRoot(container); // createRoot(container!) if you use TypeScript
   root.render(
     <AppComponent
       portletNamespace={portletNamespace}
