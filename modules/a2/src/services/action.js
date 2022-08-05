@@ -6,5 +6,5 @@ export const getOneProduct = async function () {
 };
 
 export const addProduct = async (data) => {
-  return await product.post("/product", data);
+  return await product.get("/product");
 };
