@@ -7,7 +7,7 @@ import * as FORM_LABELS from "../constants/formLabels";
 
 import getInsuranceProfileInitializeValue, {
   INSURANCE_PROFILE_SCHEMA,
-} from "../constants/InsuranceProfileSchema";
+} from "../constants/insuranceProfileSchema";
 
 function InsuranceProfile(props) {
   return (

@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import * as FORM_LABELS from "../constants/formLabels";
 import getBeneficiaryProfileInitializeValue, {
   BENEFICIARY_PROFILE_SCHEMA,
-} from "../constants/BeneficiaryProfileSchema";
+} from "../constants/beneficiaryProfileSchema";
 
 function BeneficiaryProfile(props) {
   return (
