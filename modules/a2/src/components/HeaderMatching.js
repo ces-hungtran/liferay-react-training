@@ -19,6 +19,7 @@ function HeaderMatching(props) {
     loading: true,
     data: null,
     productField: null,
+    selectedProps: {},
   });
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function HeaderMatching(props) {
     // });
     setState({
       ...state,
-      productField: ["name", ""],
+      productField: ["name", "description", ""],
     });
   }, []);
 
@@ -141,14 +142,23 @@ function HeaderMatching(props) {
     return <h1>loading...</h1>;
   }
 
-  const productSelectorOption = state.productField.map((ele, isDisable) => {
-    const className = isDisable ? "Mui-disabled" : "";
-    return (
-      <MenuItem key={ele} value={ele} className={className}>
-        {ele}
-      </MenuItem>
-    );
-  });
+  const productSelectorOption = (entry) => {
+    return state.productField.map((ele) => {
+      let className = "";
+      if (
+        state.selectedProps &&
+        state.selectedProps[ele] &&
+        entry != state.selectedProps[ele]
+      ) {
+        className = "Mui-disabled";
+      }
+      return (
+        <MenuItem key={ele} value={ele} className={className}>
+          {ele}
+        </MenuItem>
+      );
+    });
+  };
 
   const productSelector = (id, index) => {
     return (
@@ -166,10 +176,22 @@ function HeaderMatching(props) {
           }
           onChange={(e, a) => {
             formikHook.handleChange(e);
-            setState({ ...state, selectAttr: [...state.selectAttr] });
+
+            const newSelectedProps = state.selectedProps;
+            if (e.target.value === "") {
+              const oldAttr = Object.keys(newSelectedProps).filter((ele) => {
+                return newSelectedProps[ele] === e.target.name;
+              });
+              newSelectedProps[oldAttr[0]] = "";
+            }
+            newSelectedProps[e.target.value] = e.target.name;
+            setState({
+              ...state,
+              selectedProps: newSelectedProps,
+            });
           }}
         >
-          {productSelectorOption}
+          {productSelectorOption(id)}
         </Select>
       </div>
     );
